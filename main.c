@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 01:21:24 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/04 13:14:50 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:40:29 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ int			ft_is_good_len(int len)
 	while ((SIZE_TETRI * i) + (1 * (i - 1)) < len)
 		i++;
 
+	if (i > 26)
+		return (0);
+
 	return (((SIZE_TETRI * i) + (1 * (i - 1)) == len) ? 1 : 0);
 }
 
@@ -199,6 +202,10 @@ int		main(int argc, char *argv[])
 					close(fd);
 					ft_remplir_tab(&temp, argv[1], len);
 				}
+				else
+				{
+					ft_putstr("pas la bonne taill exit ");
+				}
 			}
 			else 
 			{
@@ -207,7 +214,6 @@ int		main(int argc, char *argv[])
 				else
 					ft_message_error_failure_titriminos();
 			}
-//			ft_read_file(fd);
 		}
 	}
 	else
