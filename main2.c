@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 01:21:24 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/05 15:23:09 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:03:20 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,13 @@ void	ft_read_file(int fd)
 }
 */
 
-int			ft_is_good_len(int len)
+int			ft_is_good_len(int len, int *i)
 {
-	size_t i;
-
-	i = 1;
-	while ((SIZE_TETRI * i) + (1 * (i - 1)) < len)
-		i++;
-
-	if (i > 26)
+	while ((SIZE_TETRI * (*i)) + (1 * ((*i) - 1)) < len)
+		(*i)++;
+	if ((*i) > 26)
 		return (0);
-	return (((SIZE_TETRI * i) + (1 * (i - 1)) == len) ? 1 : 0);
+	return (((SIZE_TETRI * (*i)) + (1 * ((*i) - 1)) == len) ? 1 : 0);
 }
 
 int		ft_is_char_ok(char c)
@@ -156,7 +152,7 @@ int		ft_check_chars_file(int fd)
 	return ((buf[len]) ? -1 : len);
 }
 
-void	ft_remplir_tab(char *tab, char *url_file, int size)
+void	ft_remplir_tab(char *tab, char *url_file, int size, int nbr_tetrim)
 {
 //	char *tab;
 //	tab = temp[0];
@@ -175,12 +171,30 @@ void	ft_remplir_tab(char *tab, char *url_file, int size)
 		ft_strlcat(tab, buf, BUF_SIZE);
 //			len++;
 	}
+	ft_putstr("***************************************\n");
 
-	char **mat = (char **)malloc(() * sizeof(*mat));;
+	ft_putnbr((nbr_tetrim * 4) + 1);
+	char *ta_tempb;
+	char **mat;// = (char **)malloc(((nbr_tetrim * 4) + 1) * sizeof(*mat));;
+	if(mat == NULL)
+		return ;  // colse file et free touce que j'ai puis retourner un message
 
-	while (tab)
+	int i = 0;
+	int i_mat = 0;
+	while (i < size)
 	{
-		
+		ta_tempb = ft_strcut(tab,0 + i , 19 + i);
+
+		ft_putstr("====================\n");
+
+//	
+		mat = ft_strsplit(ta_tempb, '\n');
+		ft_putmat(mat);
+
+		ft_putstr("====================\n");
+
+		ft_putnbr(ft_matlen(mat));
+		i += 21 ;
 	}
 
 //	ft_putstr(tab);
@@ -192,6 +206,7 @@ int		main(int argc, char *argv[])
 	int fd;
 	int len;
 	char *temp;
+	int nbr_tetrim;
 
 	if(argc == 2)
 	{
@@ -201,13 +216,15 @@ int		main(int argc, char *argv[])
 			if (len > 0)
 			{
 				ft_putstr(" \tfile ok ->\t hase the file the good size ?  ");
-				if (ft_is_good_len(len))
+				nbr_tetrim = 1;
+				if (ft_is_good_len(len, &nbr_tetrim))
 				{
 					temp = (char *)malloc((len + 1) * sizeof(temp));
 					if (temp == NULL)
 						return (0);
 					close(fd);
-					ft_remplir_tab(temp, argv[1], len);
+
+					ft_remplir_tab(temp, argv[1], len, nbr_tetrim);
 					ft_putstr("\n\n***********************************\n");
 					ft_putstr(temp);
 				}
