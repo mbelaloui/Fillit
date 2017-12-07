@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 01:21:24 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/05 18:03:20 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/07 20:57:20 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,18 @@ int		ft_open_file(char *url_file)
 
 int		ft_caract_ok(char *buf)
 {
-	int pt;
+	int p;
 	int flag;
 
 	flag = 1;
-	pt = 0;
-	while (pt < 20)
+	p = 0;
+	while (p < 20)
 	{
-		if ((buf[pt] == '#') || (buf[pt] == '.') || (buf[pt % 5] == '\n'))
-		{
-			flag = 1;
-		}
+		if ((buf[p] == '#' || buf[p] == '.' || buf[p % 5] == '\n') && flag == 1)
+			continue ;
 		else
-		{
-			ft_putchar(buf[20]);
-			ft_putnbr(pt);
 			flag = 0;
-		}
-		pt++;
+		p++;
 	}
 	if(flag)
 		return (1);
@@ -125,13 +119,13 @@ void	ft_read_file(int fd)
 }
 */
 
-int			ft_is_good_len(int len, int *i)
+int			ft_is_good_len(int len, int *n)
 {
-	while ((SIZE_TETRI * (*i)) + (1 * ((*i) - 1)) < len)
-		(*i)++;
-	if ((*i) > 26)
+	while ((SIZE_TETRI * (*n)) + (1 * ((*n) - 1)) < len)
+		(*n)++;
+	if ((*n) > 26)
 		return (0);
-	return (((SIZE_TETRI * (*i)) + (1 * ((*i) - 1)) == len) ? 1 : 0);
+	return (((SIZE_TETRI * (*n)) + (1 * ((*n) - 1)) == len) ? 1 : 0);
 }
 
 int		ft_is_char_ok(char c)
@@ -148,11 +142,172 @@ int		ft_check_chars_file(int fd)
 /*	while (*/read(fd, buf, BUF_SIZE);
 	/*/)
 */		while(buf[len] && ft_is_char_ok(buf[len]))
+		{
+			ft_putchar(buf[len]);
 			len++;
+		}
+		ft_putstr("\n*******************\n");
+		ft_putchar(buf[len]);
 	return ((buf[len]) ? -1 : len);
 }
 
-void	ft_remplir_tab(char *tab, char *url_file, int size, int nbr_tetrim)
+
+
+
+
+
+
+/*
+
+int		ft_getconnexion(char **tetrim_mat, int x, int y)
+{
+	int nbrconnexion;
+
+	nbrconnexion = 0;
+
+	if ((x == 0) || (y == 0)
+
+	return (nbrconnexion);
+}
+*/
+int		near(char **tetrim_mat, int x, int y)
+{
+	//1
+	if (x == 0 && y == 0)
+		ft_putstr("");
+	if (x == 0 && y == 3)
+		ft_putstr("");
+	if (x == 3 && y == 0)
+		ft_putstr("");
+	if (x == 3 && y == 3)
+		ft_putstr("");
+	//2
+	if (x > 0 && x < 3 && y > 0 && y < 3)
+		ft_putstr("");
+
+	//3
+	if (x == 0 && y > 0 && y < 3)
+		ft_putstr("");
+
+	//4
+	if (x == 3 && y > 0 && y < 3)
+		ft_putstr("");
+
+	//5
+	if (y == 0 && x > 1 && x < 3)
+		ft_putstr("");
+
+	//6
+	if (y == 3 && x > 1 && x < 3)
+		ft_putstr("");
+
+}
+
+int		check_nbr_relations(char **tetrim_mat)
+{
+	int nbr_relation;
+	int x; 
+	int y;
+
+	nbr_relation = 0;
+	x = 0;
+	while (tetrim_mat[x] && nbr_relation > -1)
+	{
+		y = 0;
+		while(tetrim_mat[y] && nbr_relation > -1)
+		{
+			if (tetrim_mat[x][y] == '#')
+				nbr_relation += near(tetrim_mat, x, y);
+			y++;
+		}
+		x++;
+	}
+	return ((nbr_relation == 6 || nbr_relation == 8) ? 1 : 0);
+}
+
+int		check_dim_tetrim(char **tetrim_mat)
+{
+	int x; 
+	int y;
+
+	x = 0;
+	while (*tetrim_mat && x < 5)
+	{
+		y = 0;
+		while((**tetrim_mat) && y < 5 )
+		{
+			y++;
+			(*tetrim_mat)++;
+		}
+		if (y != 4)
+			return (0);
+			x++;
+		tetrim_mat++;
+	}
+	return ((x == 4) ? 1 : 0);
+}
+
+int		check_nbr_hashtag(char **tetrim_mat)
+{
+	int		nbr_hashtag;
+
+	nbr_hashtag = 0;
+	while (*tetrim_mat)
+	{
+		while(**tetrim_mat)
+			if( (*(*tetrim_mat)++) == '#') 
+				nbr_hashtag++;
+		tetrim_mat++;
+	}
+	ft_putstr("the number of # in tetriminos is : ");
+	ft_putnbr(nbr_hashtag);
+	return ((nbr_hashtag == 4) ? 1 : 0);
+}
+
+int		ft_check_tetrim(char **tetrim_mat)
+{
+/*	int		elemet[4];
+	int		pt;
+	int		x;
+	int		y;
+
+	pt = 0;
+	x = 0;
+*/	int result;
+
+	result = check_nbr_hashtag(tetrim_mat) && check_dim_tetrim(tetrim_mat);
+		
+	//	&& result;
+
+	return (result);
+//	return (check_nbr_hashtag(tetrim_mat) && check_dim_tetrim(tetrim_mat) && check_nbr_relations(tetrim_mat));
+/*
+	while (tetrim_mat[x])
+	{
+		y = 0;
+		while(tetrim_mat[x][y])
+		{
+			if((tetrim_mat[x][y]) == '#')
+			{]
+				if(pt > 3 || y > 3 || x > 3)
+					return (-1);
+				elemet[pt] = ft_getconnexion(tetrim_mat, x , y);
+				if(elemet[pt] == 0)
+					return (-1);// retourner erruer -1
+				pt++;
+			}
+			y++;
+		}
+		x++;
+	}*/
+}
+
+
+
+
+
+
+int		ft_remplir_tab(char *tab, char *url_file, int size, int nbr_tetrim)
 {
 //	char *tab;
 //	tab = temp[0];
@@ -176,27 +331,35 @@ void	ft_remplir_tab(char *tab, char *url_file, int size, int nbr_tetrim)
 	ft_putnbr((nbr_tetrim * 4) + 1);
 	char *ta_tempb;
 	char **mat;// = (char **)malloc(((nbr_tetrim * 4) + 1) * sizeof(*mat));;
-	if(mat == NULL)
-		return ;  // colse file et free touce que j'ai puis retourner un message
+//	if(mat == NULL)
+//		return (0);  // colse file et free touce que j'ai puis retourner un message
 
 	int i = 0;
-	int i_mat = 0;
+//	int i_mat = 0;
 	while (i < size)
 	{
 		ta_tempb = ft_strcut(tab,0 + i , 19 + i);
 
-		ft_putstr("====================\n");
+		ft_putstr("\n====================\n");
 
 //	
 		mat = ft_strsplit(ta_tempb, '\n');
 		ft_putmat(mat);
 
-		ft_putstr("====================\n");
-
-		ft_putnbr(ft_matlen(mat));
-		i += 21 ;
+		if (ft_check_tetrim(mat))
+		{
+			ft_putstr("\n====================\n");
+			ft_putnbr(ft_matlen(mat));
+			i += 21 ;
+		}
+		else
+		{
+			ft_message_error_failure_titriminos();
+			return (0) ;
+		}
 	}
-
+	
+	return (1);
 //	ft_putstr(tab);
 //	ft_putmat(temp);
 }
@@ -215,7 +378,7 @@ int		main(int argc, char *argv[])
 			len = ft_check_chars_file(fd);
 			if (len > 0)
 			{
-				ft_putstr(" \tfile ok ->\t hase the file the good size ?  ");
+				ft_putstr("caracters file ok ->\t\n has the file the good size ?  ");
 				nbr_tetrim = 1;
 				if (ft_is_good_len(len, &nbr_tetrim))
 				{
@@ -224,13 +387,16 @@ int		main(int argc, char *argv[])
 						return (0);
 					close(fd);
 
-					ft_remplir_tab(temp, argv[1], len, nbr_tetrim);
-					ft_putstr("\n\n***********************************\n");
-					ft_putstr(temp);
+					if(ft_remplir_tab(temp, argv[1], len, nbr_tetrim))
+					{
+						ft_putstr("\n\n***********************************\n");
+						//ft_putstr(temp);
+						//
+					}
 				}
 				else
 				{
-					ft_putstr("pas la bonne taill exit ");
+					ft_putstr("\nnot the good size ! ");
 				}
 			}
 			else 

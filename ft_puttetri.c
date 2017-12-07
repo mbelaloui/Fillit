@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addtetri.c                                      :+:      :+:    :+:   */
+/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:12:38 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/06 13:18:24 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/07 13:00:35 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_addtetri(t_tetri *addto, char **toadd)
-{
-	t_tetri *temp;
 
-	if (addto == NULL || toadd == NULL)
-		return (0);
-	temp = ft_newtetri(toadd);
-	if (temp == NULL)
-		return (0);
-	addto->next = temp;
-	return (1);
+void	ft_puttetri(t_tetri *tetrim)
+{
+	if(tetrim == NULL)
+		ft_putstr("NULL");
+	else
+		while (tetrim != NULL)
+		{
+			ft_putmat(tetrim->tetriminos);
+			ft_putstr("-----------------\n");
+			tetrim = tetrim->next;
+		}
 }
