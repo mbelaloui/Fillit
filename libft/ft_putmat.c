@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 13:50:42 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/11/23 19:16:55 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/07 15:02:43 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@ void	ft_putmat(char **mat)
 
 	if (mat == NULL)
 	{
-		ft_putstr("\n");
-		ft_putstr(NULL);
+		ft_putstr("NULL\n");
 		return ;
 	}
 	i = 0;
-	while (mat[i])
+	while (*mat)
 	{
-		ft_putstr("\n ");
-		ft_putstr(mat[i]);
-		i++;
+		ft_putstr(*(mat++));
+		ft_putstr("\n");
 	}
 }
