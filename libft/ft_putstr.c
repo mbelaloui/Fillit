@@ -14,10 +14,7 @@
 
 void	ft_putstr(const char *str)
 {
-	int i;
-
-	i = 0;
-	if (str == NULL)
+        if (str == NULL)
 		write(1, "NULL", 4);
 	else
 		write(1, str, ft_strlen(str));

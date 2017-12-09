@@ -14,8 +14,11 @@
 
 int		ft_check_tetrim(char **tetrim_mat)
 {
-	int res;
-
-	res = ft_check_nbr_relations(tetrim_mat) && ft_check_dim_tetrim(tetrim_mat);
-	 return ( res && ft_check_nbr_hashtag(tetrim_mat));
+	if(!ft_check_nbr_hashtag(tetrim_mat)) 
+		return (0);
+	if(!ft_check_dim_tetrim(tetrim_mat)) 
+		return (0);
+	if(!ft_check_nbr_relations(tetrim_mat)) 
+		return (0);
+	return (1);
 }

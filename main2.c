@@ -19,9 +19,8 @@ void	ft_message_error_usage()
 
 void	ft_message_error()
 {
-	ft_putstr("ERROR");
+	ft_putstr("ERROR\n");
 }
-
 
 int		ft_open_file(char *url_file)
 {
@@ -29,9 +28,7 @@ int		ft_open_file(char *url_file)
 
 	fd = open(url_file, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_message_error();
-	}
+		return (0);
 	return (fd);
 }
 
@@ -40,63 +37,45 @@ int		ft_is_char_ok(char c)
 	return((c == '#' || c == '.' || c == '\n') ?  1 : 0);
 }
 
-int		ft_caract_ok(char *buf)
-{
-	int p;
-	int flag;
 
-	flag = 1;
-	p = 0;
-	while (p < 20)
-	{
-		if (ft_is_char_ok(buf[p]) && flag == 1)
-			continue ;
-		else
-			flag = 0;
-		p++;
-	}
-	return (flag);
+char **ft_getetrim(char *tab, int size)
+{
+	char **mat;
+	char *temp;
+	mat = ft_strsplit(ft_strcut(tab, (size * 21), 19 + (size*21)), '\n');
+	return (mat);
 }
 
-int		ft_check_chars_file(int fd, char **tab)
+
+int		ft_check_chars_file(int fd)
 {
 	char buf[4096];
 	int len;
+	int nbr_tetrim;
+	int i;
+	char **mat;
 
 	len = 0;
 	read(fd, buf, 4096);
 	while(buf[len] && ft_is_char_ok(buf[len]))
-	{
 		len++;
-	}
-	if((*tab = ft_strnew(len)) == NULL)
-		return (-1);
-	ft_strlcat(*tab, buf, len);
-	if (close(fd))
-		return (-1);
-	return ((buf[len]) ? -1 : len);
-}
-
-int		ft_remplir_tab(char *tab, int size, int nbr_tetrim)
-{
-	char *ta_tempb;
-	char **mat;
-
-	int i = 0;
-	while (i < size)
+	nbr_tetrim = 1;
+	if (ft_is_good_len(len, &nbr_tetrim))
 	{
-		ta_tempb = ft_strcut(tab,0 + i , 19 + i);
-		mat = ft_strsplit(ta_tempb, '\n');
-		if (ft_check_tetrim(mat))
-			i += 21 ;
-		else
+		i = 0;
+		while (i < nbr_tetrim)
 		{
-			ft_message_error();
-			return (0) ;
+			mat = ft_getetrim(buf, i++);
+			ft_putstr("***********************************\n");
+			ft_putmat(mat);
+			if (!ft_check_tetrim(mat))
+				return (0);
 		}
+		if (close(fd))
+			return (-1);
+		return ((buf[len]) ? 0 : len);
 	}
-	(void)nbr_tetrim;
-	return (1);
+	return (0);
 }
 
 int		main(int argc, char *argv[])
@@ -104,38 +83,18 @@ int		main(int argc, char *argv[])
 	int fd;
 	int len;
 	char *temp;
-	int nbr_tetrim;
 
-	if(argc == 2)
+	if(argc == 2 && (fd = ft_open_file(argv[1])))
 	{
-		if((fd = ft_open_file(argv[1])))
+		temp = NULL;
+		len = ft_check_chars_file(fd);
+		if (len > 0)
 		{
-			temp = NULL;
-			len = ft_check_chars_file(fd, &temp);
-			if (len > 0)
-			{
-				nbr_tetrim = 1;
-				if (ft_is_good_len(len, &nbr_tetrim))
-				{
-					if(ft_remplir_tab(temp, len, nbr_tetrim))
-					{
-						ft_putstr("\n***********************************\n");
-						//ft_putstr(temp);
-						//
-					}
-				}
-				else
-				{
-					ft_putstr("\nnot the good size ! ");
-				}
-			}
-			else 
-			{
-				if (len == 0)
-					ft_message_error();
-				else
-					ft_message_error();
-			}
+			ft_putstr("\n fin tout les tetrim sont OK \n");
+		}
+		else 
+		{
+			ft_message_error();
 		}
 	}
 	else

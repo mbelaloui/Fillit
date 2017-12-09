@@ -20,6 +20,7 @@ int		ft_check_nbr_relations(char **tetrim_mat)
 	int y;
 
 	x = 0;
+	nbr_relation = 0;
 	while (tetrim_mat[x] && nbr_relation > -1)
 	{
 		y = 0;
