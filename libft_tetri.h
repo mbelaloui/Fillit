@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 17:43:10 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/08 12:22:06 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/09 05:46:35 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,18 @@ t_tetri					*ft_newtetri(char **tetrim);
 int						ft_addtetri(t_tetri *addto, char **toadd);
 void					ft_puttetri(t_tetri *tetrim);
 int						check_nbr_relations(char **tetrim_mat);
+int						ft_is_u(char **tetrim_mat, int x, int y);
+int						ft_is_d(char **tetrim_mat, int x, int y);
+int						ft_is_l(char **tetrim_mat, int x, int y);
+int						ft_is_r(char **tetrim_mat, int x, int y);
+int						ft_upper_l(char **tetrim_mat, int y);
+int						ft_mid_l(char **tetrim_mat, int x, int y);
+int						ft_low_l(char **tetrim_mat, int y);
+int						ft_near(char **tetrim_mat, int x, int y);
 
+int						ft_check_nbr_relations(char **tetrim_mat);
+int						ft_check_dim_tetrim(char **tetriminos);
+int						ft_check_nbr_hashtag(char **tetrim_mat);
+int						ft_check_tetrim(char **tetrim_mat);
+int						ft_is_good_len(int len, int *n);
 #endif

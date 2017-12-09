@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:44:01 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/06 13:11:31 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/09 01:11:27 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_tetri		*ft_newtetri(char **tetrim)
 	if (tetrim == NULL)
 		return (NULL);
 	result = (t_tetri *)malloc(sizeof(result));
-	if(result == NULL)
+	if (result == NULL)
 		return (NULL);
 	result->tetriminos = tetrim;
 	result->next = NULL;

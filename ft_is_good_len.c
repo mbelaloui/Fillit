@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
+/*   ft_is_good_len.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/09 01:08:59 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/09 05:23:52 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/09 05:36:23 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-void	ft_puttetri(t_tetri *tetrim)
+int		ft_is_good_len(int len, int *n)
 {
-	if (tetrim == NULL)
-		ft_putstr("NULL");
-	else
-		while (tetrim != NULL)
-		{
-			ft_putmat(tetrim->tetriminos);
-			tetrim = tetrim->next;
-		}
+	while ((20 * (*n)) + (1 * ((*n) - 1)) < len)
+		(*n)++;
+	if ((*n) > 26)
+		return (0);
+	return (((20 * (*n)) + (1 * ((*n) - 1)) == len) ? 1 : 0);
 }

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
+/*   ft_mid_l.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/09 01:08:59 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/09 00:41:45 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/09 00:44:33 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-void	ft_puttetri(t_tetri *tetrim)
+int		ft_mid_l(char **tetrim_mat, int x, int y)
 {
-	if (tetrim == NULL)
-		ft_putstr("NULL");
+	int result;
+
+	result = 0;
+	result += ft_is_u(tetrim_mat, x, y);
+	result += ft_is_d(tetrim_mat, x, y);
+	if (y == 0)
+		result += ft_is_r(tetrim_mat, x, y);
 	else
-		while (tetrim != NULL)
+	{
+		if (y > 0 && y < 3)
 		{
-			ft_putmat(tetrim->tetriminos);
-			tetrim = tetrim->next;
+			result += ft_is_l(tetrim_mat, x, y);
+			result += ft_is_r(tetrim_mat, x, y);
 		}
+		else
+			result += ft_is_l(tetrim_mat, x, y);
+	}
+	return (result);
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
+/*   ft_near.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/09 01:08:59 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/09 00:47:14 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/09 01:14:19 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-void	ft_puttetri(t_tetri *tetrim)
+int		ft_near(char **tetrim_mat, int x, int y)
 {
-	if (tetrim == NULL)
-		ft_putstr("NULL");
+	if (x == 0)
+		return (ft_upper_l(tetrim_mat, y));
 	else
-		while (tetrim != NULL)
-		{
-			ft_putmat(tetrim->tetriminos);
-			tetrim = tetrim->next;
-		}
+	{
+		if (x > 0 && x < 3)
+			return (ft_mid_l(tetrim_mat, x, y));
+		else
+			return (ft_low_l(tetrim_mat, y));
+	}
 }
