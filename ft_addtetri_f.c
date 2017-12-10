@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addtetri.c                                      :+:      :+:    :+:   */
+/*   ft_addtetri_f.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:12:38 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 07:43:42 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/10 06:48:19 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/10 07:31:26 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_addtetri(t_tetri *addto, char **toadd)
+int		ft_addtetri_f(t_tetri *addto, char **toadd)
 {
 	t_tetri *temp;
 
@@ -22,7 +22,8 @@ int		ft_addtetri(t_tetri *addto, char **toadd)
 	if (temp == NULL)
 		return (0);
 	if (addto == NULL)
-		addto = ft_newtetri(toadd);
-	addto->next = temp;
-	return (1);
+		return (ft_addtetri(addto, toadd));
+	while (addto->next != NULL)
+		addto = addto->next;
+	return (ft_addtetri(addto, toadd));
 }

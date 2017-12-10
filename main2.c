@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 01:21:24 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 02:11:27 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 07:20:15 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,22 @@ int		ft_check_file(int nbr_tetrim, char buf[])
 {
 	int		i;
 	char	**mat;
+	t_tetri	*list;
+//	t_tetri *debut;
 
 	i = 0;
+	list = NULL;//ft_initetri();
+//	debut = list;
 	while (i < nbr_tetrim)
 	{
 		mat = ft_getetrim(buf, i++);
 		if (!ft_check_tetrim(mat))
 			return (0);
-
+		ft_addtetri_f(list, mat);
 	}
+
+	ft_putstr("************************************\n");
+	ft_puttetrim(list);
 	return (1);
 }
 

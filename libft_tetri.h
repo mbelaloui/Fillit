@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 17:43:10 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 04:29:29 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 07:31:41 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ typedef	struct			s_tetriminos
 	struct s_tetriminos	*next;
 }						t_tetri;
 
+t_tetri					*ft_initetri();
 t_tetri					*ft_newtetri(char **tetrim);
 int						ft_addtetri(t_tetri *addto, char **toadd);
+int						ft_addtetri_f(t_tetri *addto, char **toadd);
 void					ft_puttetri(t_tetri *tetrim);
+void					ft_puttetrim(t_tetri *tetrim);
 int						check_nbr_relations(char **tetrim_mat);
 int						ft_is_u(char **tetrim_mat, int x, int y);
 int						ft_is_d(char **tetrim_mat, int x, int y);
@@ -44,5 +47,5 @@ int						ft_open_file(char *url_file);
 char					**ft_getetrim(char *tab, int size);
 int						ft_check_chars_file(int fd, char buf[]);
 int						ft_get_dim_mat(int nbr_tetrim);
-
+int						ft_get_x_y(char **tetrim_mat, int tab_x[], int tab_y[]);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/05 18:12:15 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 06:47:41 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_puttetrim(t_tetri *tetrim)
 		while (tetrim != NULL)
 		{
 			ft_putmat(tetrim->tetriminos);
-			ft_putstr("\t\t-----------------");
+			ft_putstr("-----------------\n");
 			tetrim = tetrim->next;
 		}
 }
