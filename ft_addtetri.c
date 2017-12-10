@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 18:12:38 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 07:43:42 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 18:59:17 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		ft_addtetri(t_tetri *addto, char **toadd)
 		return (0);
 	if (addto == NULL)
 		addto = ft_newtetri(toadd);
-	addto->next = temp;
+	else
+		addto->next = temp;
 	return (1);
 }

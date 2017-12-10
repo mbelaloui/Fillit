@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 01:05:03 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 04:55:52 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 19:28:12 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int		ft_check_tetrim(char **tetrim_mat)
 {
 	if (tetrim_mat == NULL)
 		return (0);
-	if(!ft_check_nbr_hashtag(tetrim_mat)) 
+	if (!ft_check_nbr_hashtag(tetrim_mat))
 		return (0);
-	if(!ft_check_dim_tetrim(tetrim_mat)) 
+	if (!ft_check_dim_tetrim(tetrim_mat))
 		return (0);
-	if(!ft_check_nbr_relations(tetrim_mat)) 
+	if (!ft_check_nbr_relations(tetrim_mat))
 		return (0);
 	return (1);
 }
