@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_nbr_hashtag.c                             :+:      :+:    :+:   */
+/*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/09 00:58:06 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 00:37:21 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/10 01:03:35 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/10 01:05:11 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_check_nbr_hashtag(char **tetrim_mat)
+int		ft_open_file(char *url_file)
 {
-	int nbr_hashtag;
-	int x;
-	int y;
+	int fd;
 
-	nbr_hashtag = 0;
-	x = 0;
-	while (tetrim_mat[x])
-	{
-		y = 0;
-		while (tetrim_mat[x][y])
-			if (tetrim_mat[x][y++] == '#')
-				nbr_hashtag++;
-		tetrim_mat++;
-	}
-	return ((nbr_hashtag == 4) ? 1 : 0);
+	fd = open(url_file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	return (fd);
 }

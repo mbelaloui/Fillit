@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_nbr_hashtag.c                             :+:      :+:    :+:   */
+/*   ft_check_char_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/09 00:58:06 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 00:37:21 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/10 01:43:39 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/10 01:52:44 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_check_nbr_hashtag(char **tetrim_mat)
+int		ft_check_chars_file(int fd, char buf[])
 {
-	int nbr_hashtag;
-	int x;
-	int y;
+	int len;
+	int nbr_tetrim;
 
-	nbr_hashtag = 0;
-	x = 0;
-	while (tetrim_mat[x])
-	{
-		y = 0;
-		while (tetrim_mat[x][y])
-			if (tetrim_mat[x][y++] == '#')
-				nbr_hashtag++;
-		tetrim_mat++;
-	}
-	return ((nbr_hashtag == 4) ? 1 : 0);
+	len = 0;
+	read(fd, buf, 4096);
+	while (buf[len] && ft_is_char_ok(buf[len]))
+		len++;
+	if (close(fd))
+		return (-1);
+	nbr_tetrim = 1;
+	if (!ft_is_file_good_len(len, &nbr_tetrim))
+		return (0);
+	return ((buf[len]) ? 0 : nbr_tetrim);
 }

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_nbr_hashtag.c                             :+:      :+:    :+:   */
+/*   ft_get_dim_mat.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/09 00:58:06 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 00:37:21 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/10 04:20:40 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/10 04:58:28 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_check_nbr_hashtag(char **tetrim_mat)
+int		ft_get_dim_mat(int nbr_tetrim)
 {
-	int nbr_hashtag;
-	int x;
-	int y;
-
-	nbr_hashtag = 0;
-	x = 0;
-	while (tetrim_mat[x])
-	{
-		y = 0;
-		while (tetrim_mat[x][y])
-			if (tetrim_mat[x][y++] == '#')
-				nbr_hashtag++;
-		tetrim_mat++;
-	}
-	return ((nbr_hashtag == 4) ? 1 : 0);
+	if (nbr_tetrim == 1)
+		return (2);
+	if (nbr_tetrim > 1 && nbr_tetrim < 5)
+		return (4);
+	if (nbr_tetrim > 4 && nbr_tetrim < 10)
+		return (6);
+	if (nbr_tetrim > 9 && nbr_tetrim < 17)
+		return (8);
+	if (nbr_tetrim > 16 && nbr_tetrim < 26)
+		return (10);
+	if (nbr_tetrim == 26)
+		return (12);
+	return (0);
 }

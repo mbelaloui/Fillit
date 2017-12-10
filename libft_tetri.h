@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 17:43:10 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/09 05:46:35 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/10 04:29:29 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,12 @@ int						ft_check_nbr_relations(char **tetrim_mat);
 int						ft_check_dim_tetrim(char **tetriminos);
 int						ft_check_nbr_hashtag(char **tetrim_mat);
 int						ft_check_tetrim(char **tetrim_mat);
-int						ft_is_good_len(int len, int *n);
+int						ft_is_file_good_len(int len, int *n);
+int						ft_is_char_ok(char c);
+
+int						ft_open_file(char *url_file);
+char					**ft_getetrim(char *tab, int size);
+int						ft_check_chars_file(int fd, char buf[]);
+int						ft_get_dim_mat(int nbr_tetrim);
+
 #endif
