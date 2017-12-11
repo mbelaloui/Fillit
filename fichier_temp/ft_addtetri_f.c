@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
+/*   ft_addtetri_f.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/11 21:23:13 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/10 06:48:19 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/11 18:39:53 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-void	ft_puttetrim(t_tetri *tetrim)
+int		ft_addtetri_f(t_tetri **addto, char **toadd)
 {
-	int pt;
+	t_tetri *temp;
 
-	if (tetrim == NULL)
-		ft_putstr("NULL\n");
-	else
-		while (tetrim != NULL)
-		{
-			ft_putmat(tetrim->tetriminos);
-
-			ft_putchar(tetrim->c);
-			pt = 0;
-			while (pt < 4)
-			{
-				ft_putstr("\n x : ");
-				ft_putnbr(tetrim->tab_x[pt]);
-				ft_putstr(", y : ");
-				ft_putnbr(tetrim->tab_y[pt]);
-				pt++;
-			}
-			ft_putstr("\n-----------------\n");
-			tetrim = tetrim->next;
-		}
+	if (toadd == NULL)
+		return (0);
+	temp = ft_newtetri(toadd);
+	if (temp == NULL)
+		return (0);
+	if (*addto == NULL)
+	{
+		*addto = ft_newtetri(toadd);
+		return (1);
+	}
+	while ((*addto)->next != NULL)
+		*addto = (*addto)->next;
+	return (ft_addtetri(*addto, toadd));
 }

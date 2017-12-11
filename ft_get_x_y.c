@@ -6,13 +6,26 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 06:28:04 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/10 06:31:47 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/11 20:49:13 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_get_x_y(char **tetrim_mat, int tab_x[], int tab_y[])
+static	void	ft_absolut_tab(int *tab)
+{
+	int pt;
+
+	pt = 1;
+	while (pt < 4)
+	{
+		tab[pt] = tab[pt] - tab[0];
+		pt++;
+	}
+	tab[0] = 0;
+}
+
+int		ft_get_x_y(char **tetrim_mat, int *tab_x, int *tab_y)
 {
 	int pt;
 	int x;
@@ -27,15 +40,17 @@ int		ft_get_x_y(char **tetrim_mat, int tab_x[], int tab_y[])
 		y = 0;
 		while (tetrim_mat[x][y])
 		{
-			if (tetrim_mat[x][y++] == '#')
+			if (tetrim_mat[x][y] == '#')
 			{
-				tab_x[pt] = x - tab_x[0];
-				tab_y[pt++] = y - tab_y[0];
+				tab_x[pt] = x;
+				tab_y[pt] = y;
+				pt++;
 			}
+			y++;
 		}
 		x++;
 	}
-	tab_x[0] = 0;
-	tab_y[0] = 0;
+	ft_absolut_tab(tab_x);
+	ft_absolut_tab(tab_y);
 	return (1);
 }
