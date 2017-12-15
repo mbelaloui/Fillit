@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_char_file.c                               :+:      :+:    :+:   */
+/*   ft_backtraking_fillit.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/10 01:43:39 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/15 16:59:52 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/15 16:18:21 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/15 19:32:46 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_check_chars_file(int fd, char buf[])
+char	**ft_backtracking_fillit(t_tetri *lst_tetrim, int nbr_tetrim)
 {
-	int len;
-	int nbr_tetrim;
+	int		dim_mat_result;
+	char	**mat_result;
 
-	if (fd <= 0 || buf == NULL)
-		return (-1);
-	len = 0;
-	read(fd, buf, 4096);
-	while (buf[len] && ft_is_char_ok(buf[len]))
-		len++;
-	if (close(fd))
-		return (-1);
-	nbr_tetrim = 1;
-	if (!ft_is_file_good_len(len, &nbr_tetrim))
-		return (0);
-	return ((buf[len]) ? 0 : nbr_tetrim);
+	dim_mat_result = ft_get_dim_mat(nbr_tetrim);
+	mat_result = ft_init_mat(dim_mat_result);
+	while (!ft_put_tetrim_mat(&mat_result, lst_tetrim, dim_mat_result))
+	{
+		free(mat_result);
+		dim_mat_result++;
+		mat_result = ft_init_mat(dim_mat_result);
+	}
+	return (mat_result);
 }

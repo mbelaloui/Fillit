@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_char_file.c                               :+:      :+:    :+:   */
+/*   ft_puttetrim.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/10 01:43:39 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/15 16:59:52 by mbelalou         ###   ########.fr       */
+/*   Created: 2017/12/05 18:03:36 by mbelalou          #+#    #+#             */
+/*   Updated: 2017/12/12 10:20:02 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_tetri.h"
 
-int		ft_check_chars_file(int fd, char buf[])
+void	ft_puttetrim(t_tetri *tetrim)
 {
-	int len;
-	int nbr_tetrim;
+	int pt;
 
-	if (fd <= 0 || buf == NULL)
-		return (-1);
-	len = 0;
-	read(fd, buf, 4096);
-	while (buf[len] && ft_is_char_ok(buf[len]))
-		len++;
-	if (close(fd))
-		return (-1);
-	nbr_tetrim = 1;
-	if (!ft_is_file_good_len(len, &nbr_tetrim))
-		return (0);
-	return ((buf[len]) ? 0 : nbr_tetrim);
+	if (tetrim == NULL)
+		ft_putstr("NULL\n");
+	else
+		while (tetrim != NULL)
+		{
+			ft_putchar(tetrim->c);
+			pt = 0;
+			while (pt < 4)
+			{
+				ft_putstr("\n x : ");
+				ft_putnbr(tetrim->tab_x[pt]);
+				ft_putstr(", y : ");
+				ft_putnbr(tetrim->tab_y[pt]);
+				pt++;
+			}
+			ft_putstr("\n-----------------\n");
+			tetrim = tetrim->next;
+		}
 }

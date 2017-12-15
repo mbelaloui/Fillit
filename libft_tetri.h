@@ -6,13 +6,19 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 17:43:10 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/12 12:04:19 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/15 19:26:37 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_TETRI_H
 # define LIBFT_TETRI_H
 # include "libft/libft.h"
+
+typedef	struct			s_point
+{
+	int					x;
+	int					y;
+}						t_point;
 
 typedef	struct			s_tetriminos
 {
@@ -54,6 +60,12 @@ int						ft_open_file(char *url_file);
 char					**ft_getetrim(char *tab, int size);
 int						ft_check_chars_file(int fd, char buf[]);
 int						ft_get_dim_mat(int nbr_tetrim);
-int						ft_get_x_y(char **tetrim_mat, int tab_x[], int tab_y[]);
+int						ft_get_x_y_tetrim(char **tetrim_mat, int tab_x[],
+						int tab_y[]);
+
+char					**ft_init_mat(int dim_mat_result);
+int						ft_put_tetrim_mat(char ***mat, t_tetri *t, int dim_mat);
+char					**ft_backtracking_fillit(t_tetri *lst_tetrim,
+						int nbr_tetrim);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbelalou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 04:20:40 by mbelalou          #+#    #+#             */
-/*   Updated: 2017/12/12 09:50:11 by mbelalou         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:09:03 by mbelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		ft_get_dim_mat(int nbr_tetrim)
 {
+	if (nbr_tetrim <= 0)
+		return (0);
 	if (nbr_tetrim == 1)
 		return (2);
 	if (nbr_tetrim > 1 && nbr_tetrim < 5)
@@ -25,6 +27,6 @@ int		ft_get_dim_mat(int nbr_tetrim)
 	if (nbr_tetrim > 16 && nbr_tetrim < 26)
 		return (10);
 	if (nbr_tetrim == 26)
-		return (12);
+		return (11);
 	return (0);
 }
